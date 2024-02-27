@@ -1,6 +1,7 @@
 package com.jotace.imob.service.user;
 
 import com.jotace.imob.dto.GetUserDTO;
+import com.jotace.imob.entity.user.User;
 import com.jotace.imob.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,10 @@ public class UserService {
 
         return users.stream().map(GetUserDTO::new).toList();
 
+    }
 
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
     
     public GetUserDTO findUserById(Long id) {
