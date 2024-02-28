@@ -1,15 +1,19 @@
 package com.jotace.imob.entity.user;
 
 import com.jotace.imob.dto.RegisterRequestDTO;
+import com.jotace.imob.entity.post.Post;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -35,6 +39,16 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    @CreationTimestamp
+    private LocalDateTime creationTIme;
+
+    @UpdateTimestamp
+    private LocalDateTime updateTime;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts;
+
 
     public User(RegisterRequestDTO registerRequestDTO, String encryptedPassword) {
         this.name = registerRequestDTO.name();
