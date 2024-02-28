@@ -1,4 +1,4 @@
 package com.jotace.imob.dto;
 
-public record LoginResponse(String response) {
+public record LoginResponse(String token) {
 }
