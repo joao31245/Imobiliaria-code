@@ -1,9 +1,12 @@
 package com.jotace.imob.service.user;
 
 import com.jotace.imob.dto.GetUserDTO;
+import com.jotace.imob.dto.UpdateRequestDTO;
+import com.jotace.imob.dto.UpdateResponseDTO;
 import com.jotace.imob.entity.user.User;
 import com.jotace.imob.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,5 +37,26 @@ public class UserService {
 
     public void createUser(User user) {
         userRepository.save(user);
+    }
+
+    public ResponseEntity<UpdateResponseDTO> update(UpdateRequestDTO updateRequestDTO, String name) {
+        var user = this.findUserByName(name);
+
+        if(!user.getName().equals(updateRequestDTO.name())) {
+            user.setName(updateRequestDTO.name());
+        }
+
+        if(!user.getEmail().equals(updateRequestDTO.email())) {
+            user.setEmail(updateRequestDTO.email());
+        }
+
+        if(!user.getPhone().equals(updateRequestDTO.phone())) {
+            user.setPhone(updateRequestDTO.phone());
+        }
+
+        return ResponseEntity.ok(new UpdateResponseDTO(user));
+    }
+
+    public User findUserByName(String name) { return userRepository.findUserByName(name);
     }
 }
