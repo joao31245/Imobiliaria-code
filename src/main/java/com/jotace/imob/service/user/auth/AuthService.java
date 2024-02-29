@@ -1,9 +1,9 @@
 package com.jotace.imob.service.user.auth;
 
-import com.jotace.imob.dto.LoginRequestDTO;
-import com.jotace.imob.dto.LoginResponse;
-import com.jotace.imob.dto.RegisterRequestDTO;
-import com.jotace.imob.dto.RegisterResponseDTO;
+import com.jotace.imob.dto.user.LoginRequestDTO;
+import com.jotace.imob.dto.user.LoginResponse;
+import com.jotace.imob.dto.user.RegisterRequestDTO;
+import com.jotace.imob.dto.user.RegisterResponseDTO;
 import com.jotace.imob.entity.user.User;
 import com.jotace.imob.infra.security.TokenService;
 import com.jotace.imob.service.user.UserService;
