@@ -1,8 +1,8 @@
-package com.jotace.imob.controller;
+package com.jotace.imob.controller.user;
 
-import com.jotace.imob.dto.GetUserDTO;
-import com.jotace.imob.dto.UpdateRequestDTO;
-import com.jotace.imob.dto.UpdateResponseDTO;
+import com.jotace.imob.dto.user.GetUserDTO;
+import com.jotace.imob.dto.user.UpdateRequestDTO;
+import com.jotace.imob.dto.user.UpdateResponseDTO;
 import com.jotace.imob.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

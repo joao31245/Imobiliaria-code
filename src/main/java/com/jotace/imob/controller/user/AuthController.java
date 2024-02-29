@@ -1,11 +1,11 @@
-package com.jotace.imob.controller;
+package com.jotace.imob.controller.user;
 
-import com.jotace.imob.dto.LoginRequestDTO;
-import com.jotace.imob.dto.LoginResponse;
-import com.jotace.imob.dto.RegisterRequestDTO;
-import com.jotace.imob.dto.RegisterResponseDTO;
+import com.jotace.imob.dto.user.*;
+import com.jotace.imob.infra.security.TokenService;
+import com.jotace.imob.service.user.UserService;
 import com.jotace.imob.service.user.auth.AuthService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,6 +18,10 @@ public class AuthController {
 
     private final AuthService authService;
 
+    private final TokenService tokenService;
+
+    private final UserService userService;
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequestDTO loginRequestDTO) {
         return authService.login(loginRequestDTO);
@@ -28,6 +32,12 @@ public class AuthController {
         return authService.register(registerRequestDTO, uriComponentsBuilder);
     }
 
+    @GetMapping("/token")
+    public ResponseEntity<GetUserDTO> getUserByToken(@RequestBody LoginResponse loginResponse) {
+        var token = tokenService.validateToken(loginResponse.token());
 
+        return ResponseEntity.ok(new GetUserDTO(userService.findUserByEmail(token)));
+
+    }
 
 }

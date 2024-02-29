@@ -1,4 +1,4 @@
-package com.jotace.imob.dto;
+package com.jotace.imob.dto.user;
 
 import com.jotace.imob.entity.user.UserType;
 import jakarta.validation.constraints.Email;

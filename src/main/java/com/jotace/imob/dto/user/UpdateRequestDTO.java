@@ -1,4 +1,4 @@
-package com.jotace.imob.dto;
+package com.jotace.imob.dto.user;
 
 public record UpdateRequestDTO(
         String name,

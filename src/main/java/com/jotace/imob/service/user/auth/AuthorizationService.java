@@ -1,5 +1,6 @@
-package com.jotace.imob.service.user;
+package com.jotace.imob.service.user.auth;
 
+import com.jotace.imob.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

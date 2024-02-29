@@ -1,4 +1,4 @@
-package com.jotace.imob.repository;
+package com.jotace.imob.repository.user;
 
 import com.jotace.imob.entity.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
