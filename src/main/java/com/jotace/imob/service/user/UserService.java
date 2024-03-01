@@ -1,10 +1,10 @@
 package com.jotace.imob.service.user;
 
-import com.jotace.imob.dto.GetUserDTO;
-import com.jotace.imob.dto.UpdateRequestDTO;
-import com.jotace.imob.dto.UpdateResponseDTO;
+import com.jotace.imob.dto.user.GetUserDTO;
+import com.jotace.imob.dto.user.UpdateRequestDTO;
+import com.jotace.imob.dto.user.UpdateResponseDTO;
 import com.jotace.imob.entity.user.User;
-import com.jotace.imob.repository.UserRepository;
+import com.jotace.imob.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,6 +29,10 @@ public class UserService {
     
     public GetUserDTO findUserById(Long id) {
         return new GetUserDTO(userRepository.findUserById(id));
+    }
+
+    public User findById(Long id) {
+        return userRepository.findUserById(id);
     }
 
     public void delete(Long id) {

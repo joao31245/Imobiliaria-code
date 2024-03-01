@@ -1,6 +1,6 @@
 package com.jotace.imob.entity.user;
 
-import com.jotace.imob.dto.RegisterRequestDTO;
+import com.jotace.imob.dto.user.RegisterRequestDTO;
 import com.jotace.imob.entity.post.Post;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
