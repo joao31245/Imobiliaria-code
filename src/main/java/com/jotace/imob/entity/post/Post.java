@@ -1,8 +1,10 @@
 package com.jotace.imob.entity.post;
 
+import com.jotace.imob.dto.post.CreatePostRequestDTO;
 import com.jotace.imob.entity.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -10,12 +12,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Blob;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "posts")
 @Table(name = "posts")
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 @EqualsAndHashCode(of = "id")
 public class Post {
     @Id
@@ -23,16 +27,33 @@ public class Post {
     private Long id;
 
     @Lob
-    private Blob mainImage;
-
-    @Lob
-    private List<Blob> images;
+    private Blob image;
 
     private String title;
 
     private String description;
 
-    private String rooms;
+    private int rooms;
+
+    private int bathRooms;
+
+    private boolean pool;
+
+    private boolean wifi;
+
+    private PostType postType;
+
+    private String zipCode;
+
+    private String street;
+
+    private String neighborhood;
+
+    private String city;
+
+    private String state;
+
+    private String country;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -43,4 +64,13 @@ public class Post {
 
     @UpdateTimestamp
     private LocalDateTime lastUpdatedTime;
+
+    public Post(CreatePostRequestDTO createPostRequestDTO) {
+        this.title = createPostRequestDTO.title();
+        this.description = createPostRequestDTO.description();
+        this.rooms = createPostRequestDTO.rooms();
+        this.bathRooms = createPostRequestDTO.bathrooms();
+        this.pool = createPostRequestDTO.pool();
+        this.wifi = createPostRequestDTO.wifi();
+    }
 }
