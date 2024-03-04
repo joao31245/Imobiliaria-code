@@ -22,8 +22,6 @@ public record CreatePostRequestDTO(
         @NotBlank
         String zipcode,
         @NotBlank
-        String street,
-        @NotBlank
         String neighborhood,
         @NotBlank
         String city,
@@ -31,8 +29,6 @@ public record CreatePostRequestDTO(
         String state,
         @NotBlank
         String country,
-        @NotBlank
-        String number,
         @NotNull
         Long userId
 ) {

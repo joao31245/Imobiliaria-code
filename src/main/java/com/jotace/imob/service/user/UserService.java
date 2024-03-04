@@ -43,8 +43,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public ResponseEntity<UpdateResponseDTO> update(UpdateRequestDTO updateRequestDTO, String name) {
-        var user = this.findUserByName(name);
+    public ResponseEntity<UpdateResponseDTO> update(UpdateRequestDTO updateRequestDTO, Long id) {
+        var user = this.findById(id);
 
         if(!user.getName().equals(updateRequestDTO.name())) {
             user.setName(updateRequestDTO.name());
