@@ -33,7 +33,10 @@ public class PostController {
             @ApiResponse(responseCode = "201", description = "Worked!"),
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
-    public ResponseEntity<CreatePostResponseDTO> createPost(@RequestBody @Valid CreatePostRequestDTO createPostRequestDTO, UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<CreatePostResponseDTO> createPost(@RequestBody @Valid CreatePostRequestDTO createPostRequestDTO,
+                                                            UriComponentsBuilder uriComponentsBuilder
+
+    ) {
 
         return postService.createPost(createPostRequestDTO, uriComponentsBuilder);
     }

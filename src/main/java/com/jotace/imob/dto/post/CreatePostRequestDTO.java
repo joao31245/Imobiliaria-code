@@ -17,7 +17,7 @@ public record CreatePostRequestDTO(
         boolean wifi,
         @NotNull
         boolean pool,
-        @NotBlank
+        @NotNull
         PostType postType,
         @NotBlank
         String zipcode,

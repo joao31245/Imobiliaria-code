@@ -67,6 +67,11 @@ public class Post {
 
     public Post(CreatePostRequestDTO createPostRequestDTO) {
         this.title = createPostRequestDTO.title();
+        this.city =createPostRequestDTO.city();
+        this.country = createPostRequestDTO.country();
+        this.state = createPostRequestDTO.state();
+        this.zipCode = createPostRequestDTO.zipcode();
+        this.postType = createPostRequestDTO.postType();
         this.description = createPostRequestDTO.description();
         this.rooms = createPostRequestDTO.rooms();
         this.bathRooms = createPostRequestDTO.bathrooms();

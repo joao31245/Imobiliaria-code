@@ -41,7 +41,12 @@ public record GetPostDTO(
 
 class Mapper {
     public static String convertBlobToBase64(Blob blob) throws SQLException, IOException {
-        byte[] bytes = blob.getBytes(1, (int) blob.length());
-        return Base64.getEncoder().encodeToString(bytes);
+        if(blob == null) {
+            return null;
+        }
+            byte[] bytes = blob.getBytes(1, (int) blob.length());
+            return Base64.getEncoder().encodeToString(bytes);
+
+
     }
 }
