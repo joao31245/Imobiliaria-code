@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -52,13 +53,20 @@ public class AuthController {
     @Operation(summary = "Devolve a new User by the token", method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Worked!"),
-            @ApiResponse(responseCode = "500", description = "Internal Server Error")
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized")
     })
-    public ResponseEntity<GetUserDTO> getUserByToken(@RequestBody LoginResponse loginResponse) {
-        var token = tokenService.validateToken(loginResponse.token());
+    public ResponseEntity<GetUserDTO> getUserByToken(@RequestHeader("Authorization") String authorizationHeader) {
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            String token = authorizationHeader.substring(7);
 
-        return ResponseEntity.ok(new GetUserDTO(userService.findUserByEmail(token)));
+            var tokenValidationResult = tokenService.validateToken(token);
+            if (tokenValidationResult != null) {
+                return ResponseEntity.ok(new GetUserDTO(userService.findUserByEmail(tokenValidationResult)));
+            }
+        }
 
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
 }
