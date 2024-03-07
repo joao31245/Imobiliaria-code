@@ -5,6 +5,7 @@ import com.jotace.imob.dto.post.CreatePostResponseDTO;
 import com.jotace.imob.dto.post.GetPostDTO;
 import com.jotace.imob.dto.post.InsertImageResponseDTO;
 import com.jotace.imob.entity.post.Post;
+import com.jotace.imob.infra.security.TokenService;
 import com.jotace.imob.repository.post.PostRepository;
 import com.jotace.imob.service.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -28,17 +29,19 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
     private final UserService userService;
-    public ResponseEntity<CreatePostResponseDTO> createPost(CreatePostRequestDTO createPostRequestDTO, UriComponentsBuilder uriBuilder) {
+    private final TokenService tokenService;
+    public ResponseEntity<CreatePostResponseDTO> createPost(CreatePostRequestDTO createPostRequestDTO, UriComponentsBuilder uriBuilder, String token) {
         var post = new Post(createPostRequestDTO);
 
-        var user = userService.findById(createPostRequestDTO.userId());
+        var userEmail = tokenService.validateToken(token);
+
+        var user = userService.findUserByEmail(userEmail);
 
         post.setUser(user);
 
         postRepository.save(post);
 
         var uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();
-
 
         return ResponseEntity.created(uri).body(new CreatePostResponseDTO(post));
     }

@@ -28,8 +28,6 @@ public record CreatePostRequestDTO(
         @NotBlank
         String state,
         @NotBlank
-        String country,
-        @NotNull
-        Long userId
+        String country
 ) {
 }

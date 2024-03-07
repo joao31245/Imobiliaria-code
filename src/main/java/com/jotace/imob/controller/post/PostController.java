@@ -34,11 +34,10 @@ public class PostController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error")
     })
     public ResponseEntity<CreatePostResponseDTO> createPost(@RequestBody @Valid CreatePostRequestDTO createPostRequestDTO,
-                                                            UriComponentsBuilder uriComponentsBuilder
-
+                                                            UriComponentsBuilder uriComponentsBuilder,
+                                                            @RequestHeader("Authorization") String authorizationHeader
     ) {
-
-        return postService.createPost(createPostRequestDTO, uriComponentsBuilder);
+        return postService.createPost(createPostRequestDTO, uriComponentsBuilder, authorizationHeader);
     }
 
     @PutMapping("/insert/image/{id}")
