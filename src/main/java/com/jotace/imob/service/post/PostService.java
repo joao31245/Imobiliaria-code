@@ -32,15 +32,10 @@ public class PostService {
     private final TokenService tokenService;
     public ResponseEntity<CreatePostResponseDTO> createPost(CreatePostRequestDTO createPostRequestDTO, UriComponentsBuilder uriBuilder, String token) {
         var post = new Post(createPostRequestDTO);
-
-        var userEmail = tokenService.validateToken(token);
-
+        var userEmail = tokenService.validateToken(token.replace("Bearer ", ""));
         var user = userService.findUserByEmail(userEmail);
-
         post.setUser(user);
-
         postRepository.save(post);
-
         var uri = uriBuilder.path("/post/{id}").buildAndExpand(post.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new CreatePostResponseDTO(post));
