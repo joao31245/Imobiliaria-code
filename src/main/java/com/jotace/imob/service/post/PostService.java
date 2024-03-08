@@ -81,4 +81,8 @@ public class PostService {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    public ResponseEntity<GetPostDTO> getPostById(Long id) throws SQLException, IOException {
+        return ResponseEntity.ok(new GetPostDTO( (Post) postRepository.findPostById(id)));
+    }
 }

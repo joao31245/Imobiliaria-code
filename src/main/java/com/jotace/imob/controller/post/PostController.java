@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 @RestController
@@ -56,5 +58,13 @@ public class PostController {
     public ResponseEntity<List<GetPostDTO>> getAllPosts() {
        return postService.getAllPosts();
     }
+
+
+    @GetMapping("/getPostById/{id}")
+    @Operation(summary = "Get a specific post by its id")
+    public ResponseEntity<GetPostDTO> getPostById(@PathVariable Long id) throws SQLException, IOException {
+        return postService.getPostById(id);
+    }
+
 
 }
