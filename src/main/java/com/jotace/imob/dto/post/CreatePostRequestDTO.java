@@ -4,6 +4,8 @@ import com.jotace.imob.entity.post.PostType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 public record CreatePostRequestDTO(
         @NotBlank
         String title,
@@ -11,6 +13,8 @@ public record CreatePostRequestDTO(
         String description,
         @NotNull
         int rooms,
+        @NotNull
+        BigDecimal price,
         @NotNull
         int bathrooms,
         @NotNull

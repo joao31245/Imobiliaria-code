@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.math.BigDecimal;
 import java.sql.Blob;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class Post {
     private String title;
 
     private String description;
+
+    private BigDecimal price;
 
     private int rooms;
 
@@ -68,6 +71,7 @@ public class Post {
     public Post(CreatePostRequestDTO createPostRequestDTO) {
         this.title = createPostRequestDTO.title();
         this.city =createPostRequestDTO.city();
+        this.price = createPostRequestDTO.price();
         this.country = createPostRequestDTO.country();
         this.state = createPostRequestDTO.state();
         this.zipCode = createPostRequestDTO.zipcode();
