@@ -46,9 +46,7 @@ public class PostService {
             byte[] fileBytes = file.getBytes();
 
             Blob blob = new SerialBlob(fileBytes);
-
             var post = postRepository.findPostById(id);
-
             post.setImage(blob);
 
             postRepository.save(post);
